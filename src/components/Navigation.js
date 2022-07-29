@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const RegisterScreen = () => {
+const Navigation = () => {
   return (
     <View>
-      <Text>RegisterScreen</Text>
+      <Text>Navigation</Text>
     </View>
   )
 }
 
-export default RegisterScreen
+export default Navigation

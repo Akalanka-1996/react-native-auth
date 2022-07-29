@@ -1,8 +1,11 @@
+import { View, Text } from 'react-native'
 import React from 'react'
 
 const LoginScreen = () => {
   return (
-    <div>LoginScreen</div>
+    <View>
+      <Text>LoginScreen</Text>
+    </View>
   )
 }
 
