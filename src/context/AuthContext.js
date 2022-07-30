@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
-import React, {createContext, useState} from 'react'
+import React, {createContext, useState, useEffect} from 'react'
 import { BASE_URL } from '../config'
 
 export const AuthContext = createContext()
@@ -8,11 +8,12 @@ export const AuthContext = createContext()
 export const AuthProvider = ({children}) => {
     const [userInfo, setUserInfo] = useState({})
     const [isLoading, setIsLoading] = useState(false)
+    const [splashLoading, setSplashLoading] = useState(false)
 
     const register = (name, email, password) => {
        setIsLoading(true)
 
-       axios.post(`http://192.168.43.10:8080/api/users/`, {
+       axios.post(`http://192.168.1.103:8080/api/users/`, {
            name,
            email,
            password
@@ -33,7 +34,7 @@ export const AuthProvider = ({children}) => {
     const login = ( email, password) => {
         setIsLoading(true)
  
-        axios.post(`http://192.168.43.10:8080/api/users/login`, {
+        axios.post(`http://192.168.1.103:8080/api/users/login`, {
             email,
             password
         })
@@ -58,11 +59,36 @@ export const AuthProvider = ({children}) => {
          setIsLoading(false)
      }
 
+     const isLoggedIn = async () => {
+         try {
+            setSplashLoading(true)
+
+             let userInfo = await AsyncStorage.getItem('userInfo')
+             userInfo = JSON.parse(userInfo)
+
+             if(userInfo) {
+                 setUserInfo(userInfo)
+             }
+
+             setSplashLoading(false)
+         } catch (error) {
+             splashLoading(false)
+             console.log(error)
+         }
+     }
+
+     useEffect(() => {
+       isLoggedIn() 
+     }, [])
+
+
+
     return (
     <AuthContext.Provider 
         value={{
             isLoading,
             userInfo,
+            splashLoading,
             register,
             login,
             logout}}
