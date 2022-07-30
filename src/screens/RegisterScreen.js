@@ -15,7 +15,7 @@ const RegisterScreen = ({navigation}) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const {register} = useContext(AuthContext)
+  const {isLoading, register} = useContext(AuthContext)
 
   return (
     <View style={styles.container}>

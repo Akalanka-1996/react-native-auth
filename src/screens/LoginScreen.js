@@ -13,7 +13,8 @@ const LoginScreen = ({navigation}) => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const val = useContext(AuthContext)
+
+  const {isLoading, login} = useContext(AuthContext)
 
   return (
     <View style={styles.container}>
@@ -33,7 +34,9 @@ const LoginScreen = ({navigation}) => {
         />
         <Button 
           title="Login" 
-        
+          onPress={() => {
+            login( email, password)
+          }}
         />
 
         <View style={{ flexDirection: "row", marginTop: 20 }}>
