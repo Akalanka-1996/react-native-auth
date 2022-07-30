@@ -6,11 +6,15 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const LoginScreen = ({navigation}) => {
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const val = useContext(AuthContext)
+
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
@@ -27,7 +31,10 @@ const LoginScreen = ({navigation}) => {
           secureTextEntry 
           onChangeText={text => setPassword(text)}
         />
-        <Button title="Login" />
+        <Button 
+          title="Login" 
+        
+        />
 
         <View style={{ flexDirection: "row", marginTop: 20 }}>
           <Text>Don't have an account?</Text>
